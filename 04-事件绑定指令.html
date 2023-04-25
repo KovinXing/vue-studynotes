@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue初体验</title>
+</head>
+<body>
+    <div id="app">
+        <div style="background-color: rgb(240, 238, 238);color: black;padding: 20px;">
+            <p>count = {{ number }}</p>
+            <!-- 事件绑定指令：v-on: ，例如：<button v-on:click="add">+1</button> -->
+            <button v-on:click="add">+1</button>
+            <button v-on:click="sub(3)">-1</button>
+            <!-- 知识点：
+                事件对象event 点击button自加n，并且根据number奇偶改变button背景颜色
+                1、函数不传递参数 时，可通过有一个隐藏的默认事件e,可通过e.target获取点击对象
+                2、当函数传参时，可用vue提供的内置变量$event，其实就是原生的e
+             -->
+            <button @click="add_color($event, 3)">+n 变色</button>
+            <!-- 事件修饰符 .prevent 阻止默认事件 -->
+            <!-- 点击超链接会默认跳转页面。如何阻止默认行为（跳转）呢？
+                 在原生中：preventDefaults()，vue中使用事件修饰符：.prevent，使用方法如下：@click.prevent="log_google"
+             -->
+            <a href="https://www.google.com" @click.prevent="log_google">谷歌</a>
+            <hr>
+            <!-- 事件修饰符 .stop 阻止事件冒泡-->
+            <!-- 同时给div、button绑定点击事件,点击button后会同时触发点击事件，如果只需要触发button而不触发div的点击事件时，
+                 则需要阻止冒泡修复符，使用方法如下：
+                 [阻止谁冒泡，就给谁的绑定事件 .stop]
+             -->
+            <div style="height: 150px; width: auto; background-color: green;" @click="stopclick">
+                <button @click.stop="bstopclick">[.stop]</button>
+            </div>
+        </div>
+    </div>
+    <!-- 导入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        // 创建vue实例
+        const vm = new Vue({
+            // el属性是固定 写法，表示当前实例要控制页面中的哪个区域，接收值是一个选择器
+            el: '#app',
+            // data对象就是要渲染到页面的数据
+            data: {
+                number: 1
+            },
+            // methods节点的作用就是定义事件的处理函数
+            methods: {
+                /**
+                 * 1、在实际开发中 add:function(){} 可简写为 add(){}。 
+                 * 2、在sub方法中如何传参呢？使用小括号传递参数，即sub(n), 在绑定事件时要sub(2)
+                 * 3、例：原生绑定方式 onclick, vue中 v-on:click ，指令的简写 @click 
+                */
+                add:function(){
+                    // vm是一个Vuew构造函数的对象，vm中有number属性
+                    console.log(vm)
+                    // 访问data内的数据 number属性 时可以使用 vm.number 访问属性，在实际开发中用 this 替代 vm，即 this.number
+                    // vm.number++;
+                    this.number++;
+                },
+                sub(n) {
+                    this.number -= n;
+                },
+                add_color(e, n) {
+                    this.number += n; 
+                    if (this.number % 2 === 0) {
+                        e.target.style.backgroundColor = 'red';
+                        console.log('偶数')
+                    } else {
+                        e.target.style.backgroundColor = '';
+                        console.log('奇数');
+                    }
+                },
+                log_google(e) {
+                    // 原生写法：阻止点击超链接页面跳转
+                    // e.preventDefault();
+                    console.log('google');
+                },
+                stopclick() {
+                    console.log('div stopclick');
+                },
+                bstopclick() {
+                    console.log('button stopclick');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
