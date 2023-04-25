@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容渲染指令</title>
+</head>
+<body>
+    <div id="app" style="padding: 20px;">
+        <div  style="background-color: rgb(240, 238, 238);color: black;padding: 20px;">v-text指令：
+            <p>v-text指令是把数值渲染到内容区域，缺点是会覆盖原内容，不推荐</p>
+            <p v-text="username"></p>
+        </div>
+        <div style="height: 10px;"></div>
+        <div  style="background-color: rgb(240, 238, 238);color: black;padding: 20px;">{{}}插值指令：
+            <p>{{}}插值表达式实际开发中用的最多，只是占位符，只能用在内容节点，不能用在属性节点，不会复原原有内容，插值表达式可以使用
+                运算表达式
+            </p>
+            <p>{{ name2 }}</p>
+        </div>
+        <div style="height: 10px;"></div>
+        <div  style="background-color: rgb(240, 238, 238);color: black;padding: 20px;">v-html指令：
+            <p>v-html指令是带有标签的字符串渲染成html</p>
+            <p v-html="htmlstr"></p>
+        </div>
+    </div>
+    <!-- 导入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <!-- 创建vue实例 -->
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data : {
+                username: 'Kovin Xing',
+                name2: 'Mundo',
+                htmlstr: '<p style="color: red;">v-heml指令是带有标签的字符串渲染成html</p>'
+            },
+        })
+    </script>
+</body>
+</html>

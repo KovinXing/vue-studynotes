@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue初体验</title>
+</head>
+<body>
+    <div id="app">
+        <div style="background-color: rgb(240, 238, 238);color: black;padding: 20px;">
+            {{ username }}
+        </div>
+    </div>
+    <!-- 导入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        // 创建vue实例
+        const vm = new Vue({
+            // el属性是固定 写法，表示当前实例要控制页面中的哪个区域，接收值是一个选择器
+            el: '#app',
+            // data对象就是要渲染到页面的数据
+            data: {
+                username: 'Kovin Xing'
+            },
+        })
+    </script>
+</body>
+</html>
