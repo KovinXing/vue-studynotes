@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 知识点① 按下esc键清空input, 用法 @keyup.esc=''-->
+        <input type="text" @keyup.esc="clearinput" placeholder="@keyup.esc">
+        <hr>
+        <!-- 知识点② 按下enter键提交input value，用法@keyup.enter='' -->
+        <input @keyup.enter="confirm" placeholder="@keyup.enter">
+        <hr>
+        <!-- input同时监听两种键盘事件，即如下 -->
+        <input @keyup.enter="confirm" @keyup.esc="clearinput" placeholder="esc & enter">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'kovin' 
+            },
+            methods: {
+                clearinput(e){
+                    e.target.value = ''
+                },
+                confirm(e) {
+                    e.target.value
+                    console.log('提交：' + e.target.value);
+                }
+            },
+        })
+    </script>
+</body>
+</html>
