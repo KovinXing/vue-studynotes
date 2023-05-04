@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 知识点①：v-model是双向绑定指定，示例：v-model:'变量名' 。双向绑定，即数据驱动视图，视图改变会修改数据，通过调试工具可查看 -->
+        <div id="container_1">
+            <p>我的姓名：{{username}}</p>
+            <!-- 示例1: input标签绑定username属性，input输入框内输入时，username数值会同步修改，修改username数值时
+                输入框内容也会同步修改 -->
+            <input type="  text" v-model="username">
+            <hr>
+            <!-- 示例2：select标签选择器 option标签的value属性表示内容 -->
+            <!-- 如果默认选中，则使用option标签的selected属性，当select通过v-model绑定变量后，selected属性无效 -->
+            <select v-model="book">
+                <option value="0">请选择你喜欢的四大名著</option>
+                <option value="1">西游记</option>
+                <option value="2">水浒传</option>  
+                <option value="3">红楼梦</option>
+                <option value="4">三国演义</option>
+            </select>
+        </div>
+        <!-- 知识点② v-model双向绑定修饰符 -->
+        <div id="container_2">
+            <!-- v-model.number修饰符，如果不加.number则span内是字符串的拼接，加.number修饰符则为数值运算 -->
+            <input type="text" v-model.number="n1"> + <input type="text" v-model.number="n2"> = <span>{{ n1+n2 }}</span>
+            <hr>
+            <!-- v-model.tirm修饰符，滤掉input内首位空格，常用语表单内容的获取 -->
+            <input type="text" v-model.trim="user1">
+            <button @click="showUser">获取用户名</button>
+            <hr>
+            <!-- v-model.lazy修饰符，失去焦点触发事件。即只获取最终结果，不实时同步数据源 -->
+            <input type="text" v-model.lazy="lazy">
+        </div>
+    </div>
+    <!-- 导入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                username: 'kovin',
+                book: '2',
+                n1: 1,
+                n2: 5,
+                user1: 'zhang san',
+                lazy: 'kovin xing'
+            },
+            methods: {
+                showUser() {
+                    console.log(`用户名：${this.user1}`)
+                }
+            },
+        })
+    </script>
+</body>
+</html>
